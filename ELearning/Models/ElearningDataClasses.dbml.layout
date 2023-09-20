@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="ElearningDataClasses">
+  <DataContextMoniker Name="/ElearningDataClassesDataContext" />
+  <nestedChildShapes>
+    <classShape Id="33d77722-0e30-4edd-9fe6-ab15483226b0" absoluteBounds="5.25, 0.625, 2, 2.3478011067708335">
+      <DataClassMoniker Name="/ElearningDataClassesDataContext/user" />
+      <nestedChildShapes>
+        <elementListCompartment Id="6112de35-b688-4930-9af8-cc2fe2f16839" absoluteBounds="5.265, 1.085, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="3e170d42-7f43-4aaf-9227-775d19dcd8e5" absoluteBounds="1.875, 0.625, 2, 2.5401025390625">
+      <DataClassMoniker Name="/ElearningDataClassesDataContext/cour" />
+      <nestedChildShapes>
+        <elementListCompartment Id="2fc32b8c-eca7-4426-af60-f3a0d584b8f5" absoluteBounds="1.8900000000000001, 1.085, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="5602357c-1ce5-43b9-9f4b-af3634d268fb" absoluteBounds="3.75, 3.625, 2, 1.1939925130208333">
+      <DataClassMoniker Name="/ElearningDataClassesDataContext/inscription" />
+      <nestedChildShapes>
+        <elementListCompartment Id="64c7de73-494f-4c5f-a149-9c03ad9f5ab7" absoluteBounds="3.7649999999999997, 4.085, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.8124995 : 3.1651025390625); (2.8124995 : 4.22199625651042); (3.75 : 4.22199625651042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ElearningDataClassesDataContext/cour/cour_inscription" />
+      <nodes>
+        <classShapeMoniker Id="3e170d42-7f43-4aaf-9227-775d19dcd8e5" />
+        <classShapeMoniker Id="5602357c-1ce5-43b9-9f4b-af3634d268fb" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 2.97280110677083); (5.5 : 3.625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ElearningDataClassesDataContext/user/user_inscription" />
+      <nodes>
+        <classShapeMoniker Id="33d77722-0e30-4edd-9fe6-ab15483226b0" />
+        <classShapeMoniker Id="5602357c-1ce5-43b9-9f4b-af3634d268fb" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

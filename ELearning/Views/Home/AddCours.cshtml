@@ -1,0 +1,83 @@
+﻿@model ELearning.Models.cour
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Add Cours";
+}
+
+
+
+
+<section class="login-block" style="margin:15%;background-color:white">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 login-sec">
+                <h2 class="text-center">Ajouter Un Cours</h2>
+
+                @using (Html.BeginForm("AddCours", "Home", FormMethod.Post, new { @class = "login-form", enctype = "multipart/form-data" }))
+                {
+
+
+
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1" class="text-uppercase">Titre Du Cours</label>
+                        @Html.TextBoxFor(model => model.titre, new { @type = "text", @class = "form-control", required = "required" })
+
+
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1" class="text-uppercase">Intro Du Cours</label>
+                        @Html.TextBoxFor(model => model.intro, new { @type = "text", @class = "form-control", required = "required" })
+
+
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1" class="text-uppercase">Description</label>
+                        @Html.TextAreaFor(model => model.description, 10, 30, new { @type = "text", @class = "form-control", required = "required" })
+
+
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1" class="text-uppercase">Level</label>
+
+                        @Html.DropDownListFor(model => model.level, new[] {
+                        new SelectListItem() {Text = "Secondaire", Value ="1"},
+                        new SelectListItem() {Text = "Collegial", Value = "2"},
+                        new SelectListItem() {Text = "Universitaire", Value = "3"}
+                        }, "Choose an option", new { @class = "form-control" })
+
+
+
+
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1" class="text-uppercase">Video Du Cours</label>
+                        @Html.TextBoxFor(model => model.video, new { @type = "text", @class = "form-control", required = "required" })
+
+
+
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1" class="text-uppercase">Image Du Cours</label>
+                        <input type='file' name='file' />
+                    </div>
+
+
+                    <div class="form-check">
+
+                        <button type="submit" class="btn btn-login float-right">Submit</button>
+                    </div>
+
+                }
+                <span style="color:green">@ViewBag.accept</span>
+            </div>
+        </div>
+</section>

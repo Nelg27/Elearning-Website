@@ -1,0 +1,93 @@
+﻿@model ELearning.Models.cour
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Cours";
+}
+
+<div style="margin-top:10%;margin-bottom:5%" class="container">
+
+    <div class="card" id="@Model.Id">
+        <div class="container-fliud">
+            <div class="wrapper row">
+
+
+                <div class="preview col-md-6">
+
+                    <div class="preview-pic tab-content">
+                        <div class="tab-pane active" id="pic-1"><img src="../cours/@(Model.Id).jpg" /></div>
+                    </div>
+                    <ul class="preview-thumbnail nav nav-tabs"></ul>
+
+
+
+
+                    <!-- /.comment -->
+                    <div class="row bootstrap snippets">
+                        <div class="col-md-12 col-md-offset-2 col-sm-12" style="margin-top:5%">
+                            <div class="comment-wrapper">
+                                <div class="panel panel-info">
+
+                                    <div class="panel-body">
+                                        <textarea id="contenu" class="form-control" placeholder="write a comment..." rows="3"></textarea>
+                                        <br>
+                                        <button id="send" type="button" class="btn btn-info pull-right">Post</button>
+                                        <div class="clearfix"></div>
+                                        <hr>
+                                        <ul class="media-list">
+
+
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.comment -->
+
+
+
+
+
+                </div>
+                <div class="details col-md-6">
+                    <h3 class="course-title"> @Model.titre </h3>
+                    <div class="rating">
+
+                        <span class="review-no">@Model.views reviews</span>
+                    </div>
+                    <p class="course-description">
+                        @Model.description
+                    </p>
+                    <h4 class="level">Level: <span> @ViewBag.level </span></h4>
+
+                    <h5 class="source">
+                        Added By:
+                        <span clsource"size" data-toggle="tooltip" title="small">@Model.author</span>
+                    </h5>
+
+                    <div class="action">
+                        <button class="add-to-cart btn btn-default" type="button" data-toggle="modal" data-target="#myModal">Regarder Le Cours</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">@Model.titre</h4>
+                <p>@Model.intro</p>
+            </div>
+            <div class="modal-body">
+                <iframe src="@Model.video" id="info" class="iframe" name="info" seamless="" height="100%" width="100%"></iframe>
+            </div>
+        </div>
+    </div>
+</div>

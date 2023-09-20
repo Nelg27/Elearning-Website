@@ -1,0 +1,153 @@
+﻿@model ELearning.Models.user
+@{
+    ViewBag.Title = "profil";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>profil</h2>
+
+
+
+<div style="margin-top:10%" class="container emp-profile">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="profile-img">
+                <img src="~/ProfileImages/@(Model.Id.Trim()+".jpg")" onerror="this.src='../profile/anonyme.jpg'" alt="" />
+
+                <div class="file btn btn-lg btn-primary">
+                    @using (Html.BeginForm("ProcessFile", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+
+                        @Html.Raw(ViewBag.pic)
+                    }
+
+                </div>
+
+
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="profile-head">
+                <h5>
+                    @(Model.nom+ Model.prenom)
+                </h5>
+                <h6>
+                    @ViewBag.level
+                </h6>
+                <p class="proile-rating">Courses : <span id="sur">@ViewBag.inscrit/@ViewBag.tout</span></p>
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <input type="submit" id="edit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="profile-work">
+                <p>Liste des Cours</p>
+
+                @foreach (ELearning.Models.cour e in ViewBag.cours)
+                {
+                    <a id="@e.Id" href="#">@e.titre   @Html.Raw(ViewBag.manc) <br />  </a>
+                }
+
+
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="tab-content profile-tab" id="myTabContent">
+                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>User Id</label>
+                        </div>
+                        <div class="col-md-6">
+                            <p>@Model.Id</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Name</label>
+                        </div>
+                        <div class="col-md-6">
+                            <p>@(Model.prenom + Model.nom)</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Email</label>
+                        </div>
+                        <div class="col-md-6">
+                            <p>@Model.mail</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Niveau</label>
+                        </div>
+                        <div class="col-md-6">
+                            <p>@ViewBag.level</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Nombre de Cours</label>
+                        </div>
+                        <div class="col-md-6">
+                            <p id="inc">@ViewBag.inscrit</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Password:</label>
+                        </div>
+                        <div class="col-md-6">
+                            <p>*******</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+
+    $(".close").click(function () {
+
+
+        var c = $(this).parent().attr("id");
+        var tout="@ViewBag.tout";
+        var inc = parseInt( $("#inc").html());
+        var target =".profile-work a#"+c
+         $.ajax({
+            type: "post",
+            url: "@Url.Action("dropcours", "Home")",
+            data: { cours: c  },
+            success: function (data) {
+
+                inc = inc - 1;
+                $(target).remove();
+                $("#inc").html(inc);
+                $("#sur").html(inc+"/"+tout);
+
+
+            }
+
+
+        });
+
+    });
+
+
+
+</script>

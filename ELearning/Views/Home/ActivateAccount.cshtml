@@ -1,0 +1,35 @@
+﻿@model ELearning.Models.user
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Activation";
+}
+
+<section class="login-block" style="margin:15%;background-color:white">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 login-sec">
+                <h2 class="text-center">ACCOUNT ACTIVATION @Session["id"]</h2>
+
+                @using (Html.BeginForm("ActivateAccount", "Home", FormMethod.Post, new { @class = "login-form" }))
+                {
+                    <div class="form-group">
+                        <label for="exampleInputEmail1" class="text-uppercase">New Username</label>
+                        @Html.TextBoxFor(model => model.Id, new { @type = "text", @class = "form-control" })
+
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1" class="text-uppercase">New Password</label>
+                        @Html.TextBoxFor(model => model.password, new { @type = "password", @class = "form-control" })
+
+                    </div>
+                    <div class="form-check">
+
+                        <button type="submit" class="btn btn-login float-right">Submit</button>
+                    </div>
+
+                }
+            </div>
+        </div>
+    </div>
+</section>

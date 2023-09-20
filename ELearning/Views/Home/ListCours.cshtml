@@ -1,0 +1,164 @@
+﻿@model ELearning.Models.inscription
+
+@{
+    ViewBag.Title = "Liste Cours";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Portfolio Section -->
+<section class="page-section portfolio" id="portfolio" style="margin-top:5%">
+    <div class="container">
+        <!-- Portfolio Section Heading -->
+        <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">             Cours Disponibles</h2>
+        <!-- Icon Divider -->
+        <div class="divider-custom">
+            <div class="divider-custom-line"></div>
+            <div class="divider-custom-icon">
+                <i class="fas fa-star"></i>
+            </div>
+            <div class="divider-custom-line"></div>
+        </div>
+        <!-- Portfolio Grid Items -->
+        <div class="row">
+            <!-- Portfolio Item 1 -->
+            @foreach (ELearning.Models.cour e in ViewBag.listcours)
+            {
+
+
+                if (e.status == 0)
+                {
+                    <div class="col-md-6 col-lg-4" id="@e.Id">
+                        <div class="card">
+                            <a data-toggle="modal" data-target="#myModal" class="img-card" href="#">
+                                <img src="../CoursImages/@(e.Id).jpg" />
+                            </a>
+                            <div class="card-content">
+                                <h4 class="card-title"><a href="#">@e.titre</a></h4>
+                                <p class="">
+                                    @e.intro
+                                </p>
+                                <p class="">
+                                    <strong> Views:@e.views  </strong>      <span style="float:right"> <strong> Added by: @e.author </strong></span>
+                                </p>
+                            </div>
+                            <div class="card-read-more">
+                                <a data-toggle="modal" data-target="#myModal" style="color:red" href="#" class="btn btn-link btn-block">
+                                    &#9997; Inscrire maintenant
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                }
+                else
+                {
+
+
+                    <div class="col-md-6 col-lg-4" id="@e.Id">
+                        <div class="card">
+                            <a class="img-card" href="cours?id=@e.Id">
+                                <img src="../CoursImages/@(e.Id).jpg" />
+                            </a>
+                            <div class="card-content">
+                                <h4 class="card-title">
+                                    <a href="cours?id=@e.Id">
+                                        @e.titre
+                                    </a>
+                                </h4>
+                                <p class="">
+                                    @e.intro
+                                </p>
+                                <p class="">
+                                    <strong> Views:@e.views  </strong>      <span style="float:right"> <strong> Added by: @e.author </strong></span>
+                                </p>
+                            </div>
+                            <div class="card-read-more">
+                                <a href="cours?id=@e.Id" class="btn btn-link btn-block">
+                                    &#128214;  Read More
+                                </a>
+
+                            </div>
+                        </div>
+                    </div>
+
+                }
+
+            }
+
+
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+
+                        <div class="modal-body">
+                            <h2 class="text-center">Inscrire Au Cours </h2>
+                            @using (Html.BeginForm("ListCours", "Home", FormMethod.Post, new { @class = "login-form" }))
+                            {
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1" class="text-uppercase">Confirm Password</label>
+
+                                    <input class="form-control" id="password" type="password"/>
+                                    <input class="form-control" id="cours" type="hidden"/>
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1" class="text-uppercase">Cours</label>
+                                    <input type="text" id="x" class="form-control" placeholder="">
+                                </div>
+
+
+                                <div class="form-check">
+
+                                    <button id="inscri" type="button" class="btn btn-login float-right">Submit</button>
+                                </div>
+
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- /.row -->
+        </div>
+    </div>
+</section>
+
+<script>
+
+
+    $(".col-md-6").click(function () {
+
+        var id = "#" + $(this).attr("id") + " img";
+        var id2 = "#" + $(this).attr("id") + " h4"+" a";
+
+        $(".modal img").attr({ "src": $(id).attr("src") });
+        $(".modal h4").html($(id2).html());
+        $("#x").val($(id2).html());
+        $("#cours").val($(this).attr("id"));
+
+    });
+
+    $("#inscri").click(function () {
+
+        var cours = $("#cours").val();
+        var password = $("#password").val();
+
+        $.ajax({
+            type: "post",
+            url: "@Url.Action("inscrire", "Home")",
+            data: { password: password , cours:cours },
+            success: function (data) {
+
+
+                if (data == "false")
+                    $("#password").css("border-color", "red");
+                else
+                    location.reload();
+            }
+
+        });
+    });
+</script>

@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="ElearningDatabase" Class="ElearningDataClassesDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\ElearningDatabase.mdf;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="ElearningDatabaseConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.[user]" Member="users">
+    <Type Name="user">
+      <Column Name="Id" Type="System.String" DbType="Char(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="nom" Type="System.String" DbType="NChar(30)" CanBeNull="true" />
+      <Column Name="prenom" Type="System.String" DbType="NChar(30)" CanBeNull="true" />
+      <Column Name="[level]" Member="level" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="password" Type="System.String" DbType="NChar(50)" CanBeNull="true" />
+      <Column Name="actif" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="mail" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="typeuser" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Association Name="user_inscription" Member="inscriptions" ThisKey="Id" OtherKey="user" Type="inscription" />
+    </Type>
+  </Table>
+  <Table Name="dbo.cours" Member="cours">
+    <Type Name="cour">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="titre" Type="System.String" DbType="VarChar(400)" CanBeNull="true" />
+      <Column Name="description" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="author" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="video" Type="System.String" DbType="VarChar(400)" CanBeNull="true" />
+      <Column Name="intro" Type="System.String" DbType="VarChar(155)" CanBeNull="true" />
+      <Column Name="views" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="image" Type="System.String" DbType="VarChar(400)" CanBeNull="true" />
+      <Column Name="[level]" Member="level" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Association Name="cour_inscription" Member="inscriptions" ThisKey="Id" OtherKey="cours" Type="inscription" />
+    </Type>
+  </Table>
+  <Table Name="dbo.inscription" Member="inscriptions">
+    <Type Name="inscription">
+      <Column Name="cours" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="[user]" Member="user" Type="System.String" DbType="Char(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="cour_inscription" Member="cour" ThisKey="cours" OtherKey="Id" Type="cour" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="user_inscription" Member="user1" ThisKey="user" OtherKey="Id" Type="user" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+</Database>
